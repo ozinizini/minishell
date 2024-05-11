@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 12:43:09 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/10 16:09:16 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/11 17:40:23 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "./Libft/libft.h"
 
-typedef enum e_File_Type
+/* typedef enum e_File_Type
 {
 	INFILE = 0,
 	HEREDOC = 1,
@@ -38,7 +38,7 @@ typedef struct s_process
 	int		fd_outfile;
 	char	*heredoc;
 }	t_process;
-
+ */
 typedef struct s_test
 {
 	int		**fd_pipe;

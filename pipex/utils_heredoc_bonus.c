@@ -6,13 +6,13 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 17:10:07 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/10 17:29:07 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/11 17:49:40 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils_heredoc_bonus.h"
 #include "utils_error_messages.h"
-#include "utils_structs.h"
+#include "./parser/minishell.h"
 
 char	*create_heredoc_filename(int here_doc_process_counter)
 {

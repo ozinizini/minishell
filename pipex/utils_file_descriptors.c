@@ -6,12 +6,13 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:51:26 by ozini             #+#    #+#             */
-/*   Updated: 2024/04/29 13:03:19 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/11 17:49:24 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils_file_descriptors.h"
 #include "utils_error_messages.h"
+#include "./parser/minishell.h"
 
 static void	handle_fd_infile(t_list *list, t_list *redirections)
 {

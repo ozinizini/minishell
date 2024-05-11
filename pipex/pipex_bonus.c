@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:12:03 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/11 13:10:50 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/11 17:48:50 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "utils_heredoc_bonus.h"
 #include "utils_structs.h"
 #include "utils_run_built_in.h"
+#include "./parser/minishell.h"
 
 static int	return_exit_status(t_test *test, pid_t *pidc_array)
 {

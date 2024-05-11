@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:36:14 by ozini             #+#    #+#             */
-/*   Updated: 2024/04/25 11:16:18 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/11 18:31:32 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	bash_error_message(char *error_description, char *source)
 {
-	ft_putstr_fd("Entra en bash_error_message \n", 2);
 	write(2, "bash: ", 6);
 	write(2, source, ft_strlen(source));
 	write(2, ": ", 2);

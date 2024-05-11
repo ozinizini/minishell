@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:49:31 by ozini             #+#    #+#             */
-/*   Updated: 2024/04/25 11:21:27 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/11 19:03:16 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ char	*check_path(char *command, char **env)
 			break ;
 		i++;
 	}
+	if(!env[i])
+		return(free(concatenated), ft_strdup(command));
 	if (access(command, F_OK) != -1)
 	{
 		if (access(command, R_OK) != -1)

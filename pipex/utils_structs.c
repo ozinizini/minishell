@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:03:10 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/10 16:39:27 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/11 17:52:08 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "utils_error_messages.h"
 #include "../built_in/built_in.h"
 #include "utils_memory_management.h"
+#include "./parser/minishell.h"
 
 t_list	*create_env_list(char **env)
 {

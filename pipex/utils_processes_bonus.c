@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:27:28 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/11 11:43:30 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/11 17:50:02 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "utils_heredoc_bonus.h"
 #include "utils_file_descriptors.h"
 #include "utils_run_built_in.h"
+#include "./parser/minishell.h"
 
 static void	handle_dups(t_list *process, int *fd_pipe, int *fd_pipe2)
 {

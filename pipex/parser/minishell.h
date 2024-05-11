@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arosas-j <arosas-j@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:57:23 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/10 17:34:37 by arosas-j         ###   ########.fr       */
+/*   Updated: 2024/05/11 17:46:17 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include <stdlib.h>
-# include "libft/libft.h"
+# include "../Libft/libft.h"
 
 typedef enum e_File_Type
 {
