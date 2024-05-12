@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:31:33 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/12 15:55:20 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/12 16:11:29 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		input = readline("Minishell$ ");
-		if (input)
+		if (ft_strlen(input))
 		{
 			add_history(input);
 			processes = parser(input, env_list);
