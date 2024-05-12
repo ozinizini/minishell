@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:44:05 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/10 17:11:00 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/12 16:47:13 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ int		replace_existing_env_variable(t_list **env, char *export_variable,
 int		ft_cd(char *path, t_list **env, t_list **export_list);
 
 //Echoing input
-int		ft_echo(char *echo_first_argument, char **command,
-			int number_of_arguments);
+int		ft_echo(char **command, int number_of_arguments);
 //Printing environment variables
 int		ft_env(t_list *env);
 //Exit

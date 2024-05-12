@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 17:38:21 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/11 11:25:03 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/12 16:48:10 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ int	run_built_in(char **command, t_test **test)
 		ft_exit(command[1], &exit_status,
 			count_strings(command) - 1, (*test)->number_of_processes);
 	else if (strcmp(command[0], "echo") == 0)
-		exit_status = ft_echo(command[1], command, count_strings(command) - 1);
+		exit_status = ft_echo(command, count_strings(command) - 1);
 	return (exit_status);
 }
