@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 17:10:07 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/11 17:49:40 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/12 15:56:16 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	handle_heredoc(t_list *list, t_list *redirect,
 	}
 	else
 	{
-		perror("bash");
+		perror("Minishell");
 		((t_process *)list->content)->fd_infile = -1;
 		free(here_doc_name);
 		here_doc_name = NULL;

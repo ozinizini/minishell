@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:31:33 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/12 14:38:30 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/12 15:55:20 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(int argc, char **argv, char **env)
 	export_list = create_env_list(env);
 	while (1)
 	{
-		input = readline("bash-3.2$: ");
+		input = readline("Minishell$ ");
 		if (input)
 		{
 			add_history(input);

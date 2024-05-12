@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:49:58 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/12 14:45:11 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/12 15:55:44 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	exec_first_child(t_list *list, t_test *test, int **fd_pipe)
 		error_message("Error: Memory allocation failed\n");
 	}
 	execute_command(list, env_array, command_path);
-	perror("bash");
+	perror("Minishell");
 	free(command_path);
 	free_2d_char_array(env_array);
 }
@@ -80,7 +80,7 @@ void	exec_last_child(t_list *list, t_test *test, int *fd_pipe)
 		error_message("Error: Memory allocation failed\n");
 	}
 	execute_command(list, env_array, command_path);
-	perror("bash");
+	perror("Minishell");
 	free(command_path);
 	free_2d_char_array(env_array);
 }
@@ -109,7 +109,7 @@ void	exec_intermediate_child(t_list *list, t_test *test,
 		error_message("Error: Memory allocation failed\n");
 	}
 	execute_command(list, env_array, command_path);
-	perror("bash");
+	perror("Minishell");
 	free(command_path);
 	free_2d_char_array(env_array);
 }
