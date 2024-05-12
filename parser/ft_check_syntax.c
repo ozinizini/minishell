@@ -6,7 +6,7 @@
 /*   By: arosas-j <arosas-j@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:18:19 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/10 18:01:01 by arosas-j         ###   ########.fr       */
+/*   Updated: 2024/05/12 14:00:14 by arosas-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,19 @@ int	check_pipes(char *line)
 	while (line[i] == ' ')
 		i++;
 	if (line[i] == '|')
-		return (1);
+		return (2);
 	while (line[i])
 	{
 		if (line[i] == '\'' || line[i] == '\"')
-			i == skip_all_quotes(line, i);
+			i = skip_all_quotes(line, i);
 		if (line[i] == '|')
 		{
+			i++;
 			while (line[i] == ' ')
 				i++;
 			if (line[i] == '|' || !line[i])
-				return (1);
+				return (2);
+			continue ;
 		}
 		i++;
 	}
@@ -66,7 +68,7 @@ int	check_redir(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == ' <' || line[i] == '>')
+		if (line[i] == '<' || line[i] == '>')
 		{
 			while (line[i] == '<' || line[i] == '>')
 				i++;
@@ -74,9 +76,9 @@ int	check_redir(char *line)
 				i++;
 			if (line[i] == '|' || line[i] == '<'
 				|| line[i] == '>' || !line[i])
-				return (1);
+				return (3);
 		}
-		while (line[i] != '<' && line[i] != '>')
+		while (line[i] != '<' && line[i] != '>' && line[i])
 			i++;
 	}
 	return (0);
