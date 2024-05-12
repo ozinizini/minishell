@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 12:43:09 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/11 17:40:23 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/12 11:25:04 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_test
 {
 	int		**fd_pipe;
 	int		number_of_processes;
+	int		fd_std_in;
+	int		fd_std_out;
 	t_list	*env;
 	t_list	*export_list;
 }	t_test;

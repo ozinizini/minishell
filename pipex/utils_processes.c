@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:49:58 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/11 17:50:44 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/12 11:20:50 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include "./parser/minishell.h"
 #include "../built_in/built_in.h"
 #include "utils_run_built_in.h"
-
 
 static void	execute_command(t_list *list, char **env, char *command_path)
 {

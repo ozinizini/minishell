@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:03:10 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/11 17:52:08 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/12 11:36:47 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ t_test	*init_test(t_list *processes, t_list **env, t_list **export_list)
 	test = malloc(sizeof(t_test));
 	if (test == NULL)
 		error_message("Error: Memory allocation failed");
+	test->fd_std_in = dup(STDIN_FILENO);
+	test->fd_std_out = dup(STDOUT_FILENO);
 	test->fd_pipe = NULL;
 	test->number_of_processes = ft_lstsize(processes);
 	test->env = *env;
@@ -80,6 +82,8 @@ void	free_t_test(t_test *test)
 {
 	if (test->number_of_processes - 1 > 0)
 		free_2d_array_int(test->fd_pipe, test->number_of_processes - 1);
+	close(test->fd_std_in);
+	close(test->fd_std_out);
 /* 	while (test->env != NULL)
 	{
 		free(test->env->content);

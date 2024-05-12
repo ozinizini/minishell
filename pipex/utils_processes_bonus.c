@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:27:28 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/11 17:50:02 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/12 12:16:49 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,25 @@ static void	handle_dups(t_list *process, int *fd_pipe, int *fd_pipe2)
 		((t_process *)process->content)->fd_infile = open((((t_process *)
 						process->content)->heredoc), O_RDONLY);
 	if (((t_process *)process->content)->fd_infile)
+	{
 		dup2(((t_process *)process->content)->fd_infile, STDIN_FILENO);
+		close(((t_process *)process->content)->fd_infile);
+	}
 	else if (fd_pipe)
+	{
 		dup2(fd_pipe[0], STDIN_FILENO);
+		close(fd_pipe[0]);
+	}
 	if (((t_process *)process->content)->fd_outfile)
+	{
 		dup2(((t_process *)process->content)->fd_outfile, STDOUT_FILENO);
+		close(((t_process *)process->content)->fd_outfile);
+	}
 	else if (fd_pipe2)
+	{
 		dup2(fd_pipe2[1], STDOUT_FILENO);
+		close(fd_pipe2[1]);
+	}
 }
 
 int	lonesome_built_in(t_list *process, t_test **test)
@@ -52,8 +64,8 @@ int	lonesome_built_in(t_list *process, t_test **test)
 			unlink((((t_process *)process->content)->heredoc));
 		exit_status = (run_built_in(((t_process *)process->content)
 					->command, &(*test)));
-		dup2(0, STDIN_FILENO);
-		dup2(1, STDOUT_FILENO);
+		dup2((*test)->fd_std_in, STDIN_FILENO);
+		dup2((*test)->fd_std_out, STDOUT_FILENO);
 		return (exit_status);
 	}
 	else
