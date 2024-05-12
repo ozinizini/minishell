@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:31:33 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/11 18:40:11 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/12 14:38:30 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ int	main(int argc, char **argv, char **env)
 			add_history(input);
 			processes = parser(input, env_list);
 			exit_status = pipex(processes, &env_list, &export_list);
+/* 			exit_status = check_ft(input);
+			if (!exit_status)
+			{
+				processes = parser(input, env_list);
+				exit_status = pipex(processes, &env_list, &export_list);
+			} */
 			free(input);
 			printf("exit_status: %d\n", exit_status);
 		}

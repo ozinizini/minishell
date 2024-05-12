@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 10:21:08 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/10 16:09:09 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/12 14:45:23 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ static void	exit_numeric_argument_required_error(char *error_argument)
 	while (error_argument[i] != '\0')
 		if (!(ft_isdigit(error_argument[i++])))
 			break ;
-	if (error_argument[i])
+	if (!error_argument[i])
+		ft_atol(error_argument);
+	if (error_argument[i] || errno == ERANGE)
 	{
 		ft_putstr_fd("Minishell: exit: ", 2);
 		ft_putstr_fd(error_argument, 2);
@@ -29,7 +31,8 @@ static void	exit_numeric_argument_required_error(char *error_argument)
 	}
 }
 
-void	ft_exit(char *error_argument, int *exit_status, int number_of_arguments, int is_only_process)
+void	ft_exit(char *error_argument, int *exit_status,
+	int number_of_arguments, int is_only_process)
 {
 	if (is_only_process == 1)
 		printf("exit\n");
@@ -45,6 +48,6 @@ void	ft_exit(char *error_argument, int *exit_status, int number_of_arguments, in
 	else
 	{
 		exit_numeric_argument_required_error(error_argument);
-		exit(ft_atoi((const char *)error_argument) % 256);
+		exit(ft_atol((const char *)error_argument) % 256);
 	}
 }

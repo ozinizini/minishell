@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:28:03 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/12 12:58:24 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/12 14:36:55 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,59 @@
 #include <errno.h>
 #include <limits.h>
 
+static long	check_quotient(long quotient)
+{
+	if (LONG_MAX >= quotient * 10)
+		return (quotient * 10);
+	else
+	{
+		errno = ERANGE;
+		return (quotient);
+	}
+}
+
+static long	check_number(int digit, long atol, long quotient)
+{
+	if (digit <= (LONG_MAX - atol) / quotient)
+	{
+		atol += digit * quotient;
+		return (atol);
+	}
+	else
+	{
+		errno = ERANGE;
+		return (atol);
+	}
+}
+
 static long	number(const char *str)
 {
-	long    atoi;
-	int     i;
-	long    quotient;
+	long	atol;
+	int		i;
+	long	quotient;
 
-	atoi = 0;
+	atol = 0;
 	i = 0;
 	quotient = 1;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (i > 0)
-			quotient *= 10;
-		i++;
+		if (i++ > 0)
+		{
+			quotient = check_quotient(quotient);
+			if (errno == ERANGE)
+				return (quotient);
+		}
 	}
 	while (*str >= '0' && *str <= '9')
 	{
-		atoi += (*str - 48) * quotient;
+		atol = check_number(*str - 48, atol, quotient);
 		str++;
 		quotient /= 10;
 	}
-	return (atoi);
+	return (atol);
 }
 
-long    ft_atol(const char *str)
+long	ft_atol(const char *str)
 {
 	int	sign;
 
@@ -63,8 +91,15 @@ long    ft_atol(const char *str)
 
 /* int	main(void)
 {
-	printf("El número con ft_es: %ld\n", ft_atol( "9223372036854775807"));
-	printf("El número es: %ld\n", atol( "9223372036854775808"));
-	if (errno == ERANGE)	
-		printf("errno: %d\n", errno);
+	int		saved_errno;
+	long	number;
+
+	//number = ft_atol( "922337203685477580899808098098098");
+	number = ft_atol("9223372036854775808");
+	saved_errno = errno;
+	if (saved_errno == ERANGE)
+		printf("errno: %d\n", saved_errno);
+	else
+		printf("El número con ft_es: %ld\n", number);
+	//printf("El número es: %ld\n", atol( "9223372036854775807"));
 } */
