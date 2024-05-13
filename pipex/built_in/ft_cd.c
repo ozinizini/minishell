@@ -6,13 +6,14 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 12:28:00 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/10 14:00:37 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/13 12:12:28 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built_in.h"
 
-static	void	var_value(char **path, t_list *env, int position)
+static	void	home_previous(char **path, t_list *env,
+		int position, int previous)
 {
 	int		i;
 
@@ -23,6 +24,8 @@ static	void	var_value(char **path, t_list *env, int position)
 			ft_strlen((const char *)env->content));
 	if (*path)
 		(*path)++;
+	if (previous)
+		printf("%s\n", *path);
 }
 
 static int	update_pwd_oldpwd_env_variables(t_list **env,
@@ -66,14 +69,14 @@ int	ft_cd(char *path, t_list **env, t_list **export_list)
 	if (path == NULL)
 	{
 		if (env_variable_exists(*env, "HOME"))
-			var_value(&path, *env, env_variable_exists(*env, "HOME"));
+			home_previous(&path, *env, env_variable_exists(*env, "HOME"), 0);
 		else
 			return (error_message_return("Minishell: cd: HOME not set\n", 1));
 	}
 	else if (!ft_strcmp(path, "-"))
 	{
 		if (env_variable_exists(*env, "OLDPWD"))
-			var_value(&path, *env, env_variable_exists(*env, "OLDPWD"));
+			home_previous(&path, *env, env_variable_exists(*env, "OLDPWD"), 1);
 		else
 			return (error_message_return("Minishell: cd: OLDPWD not set\n", 1));
 	}
