@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:31:33 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/13 16:41:03 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/13 16:53:46 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "../built_in/built_in.h"
 #include "utils_structs.h"
 #include "utils_memory_management.h"
+#include "utils_env_export_lists.h"
 #include "./parser/minishell.h"
 #include "pipex_bonus.h"
 

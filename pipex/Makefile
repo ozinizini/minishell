@@ -25,6 +25,7 @@ SRCS =	./pipex_bonus.c\
 		./utils_structs.c\
 		./utils_file_descriptors.c\
 		./utils_run_built_in.c\
+		./utils_env_export_lists.c\
 		./readline_test.c
 
 OBJS = ${SRCS:.c=.o}
