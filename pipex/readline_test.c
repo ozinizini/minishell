@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:31:33 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/12 17:13:27 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/13 16:41:03 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argv;
 	(void)argc;
-	//atexit(ft_leaks);
+	atexit(ft_leaks);
 	exit_status = 0;
 	getcwd(cwd, sizeof(cwd));
 	env_list = create_env_list(env);
@@ -55,20 +55,21 @@ int	main(int argc, char **argv, char **env)
 				exit_status = pipex(processes, &env_list, &export_list);
 			} */
 			free(input);
+			clean_up_processes_list(processes);
 			printf("exit_status: %d\n", exit_status);
 		}
 	}
-/* 	while (list != NULL)
+	while (env_list != NULL)
 	{
-		free(list->content);
-		free(list);
-		list = list->next;
+		free(env_list->content);
+		free(env_list);
+		env_list = env_list->next;
 	}
 	while (export_list != NULL)
 	{
 		free(export_list->content);
 		free(export_list);
 		export_list = export_list->next;
-	} */ 
+	}
 	return (exit_status);
 }

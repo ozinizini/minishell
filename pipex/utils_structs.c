@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:03:10 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/13 16:00:12 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/13 16:41:29 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,11 +138,6 @@ void	free_prompt(t_prompt *prompt)
 		free_2d_array_int(prompt->fd_pipe, prompt->number_of_processes - 1);
 	close(prompt->fd_std_in);
 	close(prompt->fd_std_out);
-/* 	while (prompt->env != NULL)
-	{
-		free(prompt->env->content);
-		prompt->env = prompt->env->next;
-	} */
 	free(prompt);
 }
 
