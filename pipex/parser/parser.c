@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arosas-j <arosas-j@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:56:03 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/10 17:33:28 by arosas-j         ###   ########.fr       */
+/*   Updated: 2024/05/13 16:18:46 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,5 @@ t_list	*parser(char *line, t_list *env)
 	str_process = ft_split_process(line);
 	get_process_list(str_process, &process_list);
 	parse_list(process_list, env);
-	//free(line);
 	return (process_list);
 }
