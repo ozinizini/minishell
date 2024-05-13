@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:03:10 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/13 13:03:47 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/13 16:00:12 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,15 @@ static t_list	*set_shlvl(char *old_shlvl, int shlvl_exists)
 	return (node);
 }
 
+static void	start_shlvl(t_list **list)
+{
+	t_list	*node;
+
+	node = NULL;
+	node = set_shlvl("SHLVL=1", 0);
+	ft_lstadd_back(&(*list), node);
+}
+
 t_list	*create_env_list(char **env)
 {
 	t_list	*node;
@@ -64,10 +73,7 @@ t_list	*create_env_list(char **env)
 		i++;
 	}
 	if (!shlvl_exists)
-	{
-		node = set_shlvl("SHLVL=1", 0);
-		ft_lstadd_back(&list, node);
-	}
+		start_shlvl(&list);
 	return (list);
 }
 

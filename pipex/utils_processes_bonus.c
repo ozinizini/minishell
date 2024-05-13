@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:27:28 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/13 12:55:30 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/13 15:39:09 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,8 @@ void	intermediate_children_process(t_list *process, t_prompt *prompt,
 	exit(EXIT_FAILURE);
 }
 
-void	outfile_child_process_bonus(t_list *process, t_prompt *prompt, int *fd_pipe)
+void	outfile_child_process_bonus(t_list *process,
+	t_prompt *prompt, int *fd_pipe)
 {
 	int	fd_infile;
 
