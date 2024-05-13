@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:46:00 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/10 17:42:01 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/13 13:00:47 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 # include <string.h>
 # include "utils_structs.h"
 
-void	exec_first_child(t_list *list, t_test *test, int **fd_pipe);
-void	exec_last_child(t_list *list, t_test *test, int *fd_pipe);
-void	exec_intermediate_child(t_list *list, t_test *test,
+void	exec_first_child(t_list *list, t_prompt *prompt, int **fd_pipe);
+void	exec_last_child(t_list *list, t_prompt *prompt, int *fd_pipe);
+void	exec_intermediate_child(t_list *list, t_prompt *prompt,
 			int *fd_pipe, int *fd_pipe2);
 
 #endif

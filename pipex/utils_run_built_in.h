@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 17:38:40 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/11 11:42:38 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/13 13:01:10 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@
 # include "utils_memory_management.h"
 
 int	is_built_in( char *command);
-int	run_built_in(char **command, t_test **test);
+int	run_built_in(char **command, t_prompt **prompt);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:03:10 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/13 12:35:55 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/13 13:03:47 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,45 +99,45 @@ char	**string_list_to_bidimensional_array(t_list *env)
 	return (env_variables);
 }
 
-t_test	*init_test(t_list *processes, t_list **env, t_list **export_list)
+t_prompt	*init_prompt(t_list *processes, t_list **env, t_list **export_list)
 {
-	t_test	*test;
+	t_prompt	*prompt;
 
-	test = malloc(sizeof(t_test));
-	if (test == NULL)
+	prompt = malloc(sizeof(t_prompt));
+	if (prompt == NULL)
 		error_message("Error: Memory allocation failed");
-	test->fd_std_in = dup(STDIN_FILENO);
-	test->fd_std_out = dup(STDOUT_FILENO);
-	test->fd_pipe = NULL;
-	test->number_of_processes = ft_lstsize(processes);
-	if (test->number_of_processes - 1 > 0)
+	prompt->fd_std_in = dup(STDIN_FILENO);
+	prompt->fd_std_out = dup(STDOUT_FILENO);
+	prompt->fd_pipe = NULL;
+	prompt->number_of_processes = ft_lstsize(processes);
+	if (prompt->number_of_processes - 1 > 0)
 	{
-		test->fd_pipe = init_2d_array(test->number_of_processes - 1, 2);
-		if (test->fd_pipe == NULL)
+		prompt->fd_pipe = init_2d_array(prompt->number_of_processes - 1, 2);
+		if (prompt->fd_pipe == NULL)
 			error_message("Error: Memory allocation failed");
-		if (pipe(test->fd_pipe[0]) == -1)
+		if (pipe(prompt->fd_pipe[0]) == -1)
 		{
-			free_2d_array_int(test->fd_pipe, test->number_of_processes - 1);
+			free_2d_array_int(prompt->fd_pipe, prompt->number_of_processes - 1);
 			error_message(strerror(errno));
 		}
 	}
-	test->env = *env;
-	test->export_list = *export_list;
-	return (test);
+	prompt->env = *env;
+	prompt->export_list = *export_list;
+	return (prompt);
 }
 
-void	free_t_test(t_test *test)
+void	free_prompt(t_prompt *prompt)
 {
-	if (test->number_of_processes - 1 > 0)
-		free_2d_array_int(test->fd_pipe, test->number_of_processes - 1);
-	close(test->fd_std_in);
-	close(test->fd_std_out);
-/* 	while (test->env != NULL)
+	if (prompt->number_of_processes - 1 > 0)
+		free_2d_array_int(prompt->fd_pipe, prompt->number_of_processes - 1);
+	close(prompt->fd_std_in);
+	close(prompt->fd_std_out);
+/* 	while (prompt->env != NULL)
 	{
-		free(test->env->content);
-		test->env = test->env->next;
+		free(prompt->env->content);
+		prompt->env = prompt->env->next;
 	} */
-	free(test);
+	free(prompt);
 }
 
 void	clean_up_processes_list(t_list *list)

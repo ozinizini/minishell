@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:27:28 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/12 12:16:49 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/13 12:55:30 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	handle_dups(t_list *process, int *fd_pipe, int *fd_pipe2)
 	}
 }
 
-int	lonesome_built_in(t_list *process, t_test **test)
+int	lonesome_built_in(t_list *process, t_prompt **prompt)
 {
 	int	fd_infile;
 	int	exit_status;
@@ -63,16 +63,16 @@ int	lonesome_built_in(t_list *process, t_test **test)
 		if ((((t_process *)process->content)->heredoc))
 			unlink((((t_process *)process->content)->heredoc));
 		exit_status = (run_built_in(((t_process *)process->content)
-					->command, &(*test)));
-		dup2((*test)->fd_std_in, STDIN_FILENO);
-		dup2((*test)->fd_std_out, STDOUT_FILENO);
+					->command, &(*prompt)));
+		dup2((*prompt)->fd_std_in, STDIN_FILENO);
+		dup2((*prompt)->fd_std_out, STDOUT_FILENO);
 		return (exit_status);
 	}
 	else
 		return (1);
 }
 
-void	infile_child_process_bonus(t_list *process, t_test *test,
+void	infile_child_process_bonus(t_list *process, t_prompt *prompt,
 	int **fd_pipe)
 {
 	int	fd_infile;
@@ -91,14 +91,14 @@ void	infile_child_process_bonus(t_list *process, t_test *test,
 			handle_dups(process, NULL, NULL);
 		if ((((t_process *)process->content)->heredoc))
 			unlink((((t_process *)process->content)->heredoc));
-		exec_first_child(process, test, fd_pipe);
+		exec_first_child(process, prompt, fd_pipe);
 	}
 	else if (fd_pipe)
 		close(fd_pipe[0][1]);
 	exit(EXIT_FAILURE);
 }
 
-void	intermediate_children_process(t_list *process, t_test *test,
+void	intermediate_children_process(t_list *process, t_prompt *prompt,
 	int *fd_pipe, int *fd_pipe2)
 {
 	int	fd_infile;
@@ -112,7 +112,7 @@ void	intermediate_children_process(t_list *process, t_test *test,
 		handle_dups(process, fd_pipe, fd_pipe2);
 		if ((((t_process *)process->content)->heredoc))
 			unlink((((t_process *)process->content)->heredoc));
-		exec_intermediate_child(process, test, fd_pipe, fd_pipe2);
+		exec_intermediate_child(process, prompt, fd_pipe, fd_pipe2);
 	}
 	else
 	{
@@ -123,7 +123,7 @@ void	intermediate_children_process(t_list *process, t_test *test,
 	exit(EXIT_FAILURE);
 }
 
-void	outfile_child_process_bonus(t_list *process, t_test *test, int *fd_pipe)
+void	outfile_child_process_bonus(t_list *process, t_prompt *prompt, int *fd_pipe)
 {
 	int	fd_infile;
 
@@ -136,7 +136,7 @@ void	outfile_child_process_bonus(t_list *process, t_test *test, int *fd_pipe)
 		handle_dups(process, fd_pipe, NULL);
 		if ((((t_process *)process->content)->heredoc))
 			unlink((((t_process *)process->content)->heredoc));
-		exec_last_child(process, test, fd_pipe);
+		exec_last_child(process, prompt, fd_pipe);
 	}
 	else
 		close(fd_pipe[0]);

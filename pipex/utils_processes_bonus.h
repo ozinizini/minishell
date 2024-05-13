@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:26:00 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/10 17:20:34 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/13 12:59:32 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@
 # include <string.h>
 # include "utils_structs.h"
 
-int		lonesome_built_in(t_list *process, t_test **test);
-void	infile_child_process_bonus(t_list *process, t_test *test,
+int		lonesome_built_in(t_list *process, t_prompt **prompt);
+void	infile_child_process_bonus(t_list *process, t_prompt *prompt,
 			int **fd_pipe);
-void	intermediate_children_process(t_list *process, t_test *test,
+void	intermediate_children_process(t_list *process, t_prompt *prompt,
 			int *fd_pipe, int *fd_pipe2);
 void	outfile_child_process_bonus(t_list *process,
-			t_test *test, int *fd_pipe);
+			t_prompt *prompt, int *fd_pipe);
 
 #endif
