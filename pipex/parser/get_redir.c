@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arosas-j <arosas-j@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:13:00 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/10 17:38:50 by arosas-j         ###   ########.fr       */
+/*   Updated: 2024/05/13 16:11:34 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	get_redir(char *str_process, t_process *process, t_list *env)
 			i = 0;
 			continue ;
 		}
-		i++;
+		if (str_process[i])
+			i++;
 	}
 }
