@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:28:03 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/12 14:36:55 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/13 17:40:01 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ static long	number(const char *str)
 	while (*str >= '0' && *str <= '9')
 	{
 		atol = check_number(*str - 48, atol, quotient);
+		if (errno == ERANGE)
+			return (atol);
 		str++;
 		quotient /= 10;
 	}
