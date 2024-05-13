@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:49:31 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/11 19:03:16 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/13 15:27:29 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "utils_error_messages.h"
 #include "utils_memory_management.h"
 
-int	create_path(char *env, char *command, char *concatenated)
+static int	create_path(char *env, char *command, char *concatenated)
 {
 	char	**split_path;
 	char	*path;
@@ -43,32 +43,42 @@ int	create_path(char *env, char *command, char *concatenated)
 	return (0);
 }
 
-char	*check_path(char *command, char **env)
+static	int	path_env_exists(char **env)
 {
 	int		i;
-	char	*concatenated;
 
-	concatenated = malloc(100 * sizeof(char));
-	if (concatenated == NULL)
-		return (NULL);
-	concatenated[0] = '\0';
 	i = 0;
 	while (env[i] != NULL)
 	{
 		if (ft_strncmp(env[i], "PATH=", 5) == 0)
-			break ;
+			return (i);
 		i++;
 	}
-	if(!env[i])
-		return(free(concatenated), ft_strdup(command));
+	return (0);
+}
+
+
+char	*check_path(char *command, char **env)
+{
+	char	*concatenated;
+	int		path_env_pos;
+
+	path_env_pos = 0;
+	concatenated = malloc(100 * sizeof(char));
+	if (concatenated == NULL)
+		return (NULL);
+	concatenated[0] = '\0';
+	path_env_pos = path_env_exists(env);
+	if (!path_env_pos)
+		return (free(concatenated), ft_strdup(command));
 	if (access(command, F_OK) != -1)
 	{
 		if (access(command, R_OK) != -1)
 			ft_strlcat(concatenated, command, 100);
 	}
-	else if (create_path(env[i], command, concatenated) == 1)
+	else if (create_path(env[path_env_pos], command, concatenated) == 1)
 		return (free(concatenated), NULL);
-	else if ((create_path(env[i], command, concatenated) == 0)
+	else if ((create_path(env[path_env_pos], command, concatenated) == 0)
 		&& concatenated[0] == '\0')
 		return (free(concatenated), ft_strdup(command));
 	return (concatenated);

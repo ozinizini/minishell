@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:12:03 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/13 13:24:59 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/13 14:41:50 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ static int	handle_processes_bonus(t_list *processes, t_prompt *prompt)
 int	pipex(t_list *processes, t_list **env, t_list **export_list)
 {
 	t_prompt	*prompt;
-	int		exit_status;
+	int			exit_status;
 
 	exit_status = 0;
 	prompt = init_prompt(processes, &(*env), &(*export_list));

@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 10:32:51 by ozini             #+#    #+#             */
-/*   Updated: 2024/03/25 14:40:24 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/13 15:24:22 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <errno.h>
 # include <string.h>
 
-int		create_path(char *env, char *command, char *concatenated);
 char	*check_path(char *command, char **env);
 
 #endif
