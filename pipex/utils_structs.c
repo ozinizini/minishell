@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:03:10 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/12 18:03:35 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/13 12:35:55 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,17 @@ t_test	*init_test(t_list *processes, t_list **env, t_list **export_list)
 	test->fd_std_out = dup(STDOUT_FILENO);
 	test->fd_pipe = NULL;
 	test->number_of_processes = ft_lstsize(processes);
+	if (test->number_of_processes - 1 > 0)
+	{
+		test->fd_pipe = init_2d_array(test->number_of_processes - 1, 2);
+		if (test->fd_pipe == NULL)
+			error_message("Error: Memory allocation failed");
+		if (pipe(test->fd_pipe[0]) == -1)
+		{
+			free_2d_array_int(test->fd_pipe, test->number_of_processes - 1);
+			error_message(strerror(errno));
+		}
+	}
 	test->env = *env;
 	test->export_list = *export_list;
 	return (test);

@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:12:03 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/13 11:58:21 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/13 12:38:33 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,17 +113,6 @@ int	pipex(t_list *processes, t_list **env, t_list **export_list)
 	test = init_test(processes, &(*env), &(*export_list));
 	if (test->number_of_processes == 0)
 		return (exit_status);
-	if (test->number_of_processes - 1 > 0)
-	{
-		test->fd_pipe = init_2d_array(test->number_of_processes - 1, 2);
-		if (test->fd_pipe == NULL)
-			error_message("Error: Memory allocation failed");
-		if (pipe(test->fd_pipe[0]) == -1)
-		{
-			free_2d_array_int(test->fd_pipe, test->number_of_processes - 1);
-			error_message(strerror(errno));
-		}
-	}
 	init_heredocs(processes);
 	if (test->number_of_processes == 1
 		&& is_built_in(((t_process *)processes->content)->command[0]))
