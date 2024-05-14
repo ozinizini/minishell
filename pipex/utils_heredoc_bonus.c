@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 17:10:07 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/14 10:46:26 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 13:43:18 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	handle_heredoc(t_list *list, t_list *redirect,
 	char	*here_doc_name;
 
 	here_doc_name = NULL;
-	if (!((t_process *)list->content)->heredoc)
-		here_doc_name = create_heredoc_filename(here_doc_process_counter);
+	here_doc_name = create_heredoc_filename(here_doc_process_counter);
 	if (create_heredoc_file(((t_redir *)redirect->content)->name,
 			here_doc_name))
 	{
+		free(((t_process *)list->content)->heredoc);
 		((t_process *)list->content)->heredoc = ft_strdup(here_doc_name);
 		free(here_doc_name);
 		here_doc_name = NULL;

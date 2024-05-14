@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:12:03 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/13 14:41:50 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 11:55:17 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "utils_paths.h"
 #include "utils_processes.h"
 #include "utils_processes_bonus.h"
+#include "utils_file_descriptors.h"
 #include "pipex_bonus.h"
 #include "utils_heredoc_bonus.h"
 #include "utils_structs.h"
@@ -115,6 +116,9 @@ int	pipex(t_list *processes, t_list **env, t_list **export_list)
 		return (exit_status);
 	init_heredocs(processes);
 	if (prompt->number_of_processes == 1
+		&& !((t_process *)processes->content)->command)
+		handle_file_descriptors(processes);
+	else if (prompt->number_of_processes == 1
 		&& is_built_in(((t_process *)processes->content)->command[0]))
 		exit_status = lonesome_built_in(processes, &prompt);
 	else

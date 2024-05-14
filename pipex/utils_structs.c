@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:03:10 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/13 16:50:03 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 13:42:07 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,7 @@ void	clean_up_processes_list(t_list *list)
 	{
 		process = (t_process *)list->content;
 		free_2d_char_array(process->command);
-		if (process->heredoc)
-			free(process->heredoc);
+		free(process->heredoc);
 		redirec_list = process->redirections;
 		while (redirec_list != NULL)
 		{
