@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 10:21:08 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/12 14:49:31 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 16:35:43 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_exit(char *error_argument, int *exit_status,
 	if (number_of_arguments > 1)
 	{
 		exit_numeric_argument_required_error(error_argument);
-		printf("Minishell: exit: too many arguments\n");
+		ft_putstr_fd("Minishell: exit: too many arguments\n", 2);
 		*exit_status = 1;
 		return ;
 	}
