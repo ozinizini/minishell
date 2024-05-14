@@ -6,20 +6,19 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:31:33 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/14 16:15:59 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 16:28:53 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <readline/readline.h>
 #include <readline/history.h>
-#include "libft.h"
-#include "../built_in/built_in.h"
+#include "./Libft/libft.h"
+#include "./built_in/built_in.h"
+#include "execute.h"
 #include "utils_structs.h"
-#include "utils_memory_management.h"
-#include "utils_env_export_lists.h"
 #include "./parser/minishell.h"
-#include "pipex_bonus.h"
+
 
 void ft_leaks()
 {
