@@ -6,7 +6,7 @@
 /*   By: arosas-j <arosas-j@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:10:23 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/14 17:48:05 by arosas-j         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:34:32 by arosas-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ char	**ft_split_words(char *s)
 
 	i = 0;
 	if (s == NULL)
+		return (NULL);
+	if (!check_empty(s))
 		return (NULL);
 	len = get_len(s);
 	split = malloc((len + 1) * sizeof(char *));

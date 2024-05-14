@@ -6,7 +6,7 @@
 /*   By: arosas-j <arosas-j@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:57:23 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/14 17:29:53 by arosas-j         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:34:13 by arosas-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ char			*ft_clean_quotes(char *line);
 
 char			**ft_split_process(char *s);
 char			**ft_split_words(char *s);
+int				check_empty(char *s);
 
 //Redirections
 
