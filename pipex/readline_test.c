@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:31:33 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/14 16:40:28 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 17:10:39 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argv;
 	(void)argc;
-	//atexit(ft_leaks);
+	atexit(ft_leaks);
 	exit_status = 0;
 	getcwd(cwd, sizeof(cwd));
 	env_list = create_env_list(env);
