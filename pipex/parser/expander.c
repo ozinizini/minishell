@@ -6,7 +6,7 @@
 /*   By: arosas-j <arosas-j@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 13:46:22 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/09 19:21:13 by arosas-j         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:03:05 by arosas-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ char	*expand_line(char *line, size_t len, t_list *env)
 	{
 		if (line[i[0]] == '\'')
 			manage_quotes(line, expanded_line, i);
-		else if (line[i[0]] == '$'
-			&& (ft_isalnum(line[i[0] + 1]) || line[i[0] + 1] == '_'))
+		else if (line[i[0]] == '$' && (ft_isalnum(line[i[0] + 1])
+				|| line[i[0] + 1] == '_' || line[i[0] + 1] == '?'))
 			manage_variable(line, expanded_line, env, i);
 		else
 			copy_char(line, expanded_line, i);

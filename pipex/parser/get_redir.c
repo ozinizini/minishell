@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:13:00 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/13 16:12:34 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 18:18:49 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	add_redir_list(char *ptr, t_process *process, t_list *env)
 
 	redir = split_redir(ptr);
 	redir->name = expander(redir->name, env);
+	redir->name = ft_clean_quotes(redir->name);
 	redir_list = ft_lstnew(redir);
 	ft_lstadd_back(&process->redirections, redir_list);
 }

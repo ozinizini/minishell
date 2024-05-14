@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:57:23 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/11 17:46:17 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 18:19:35 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,19 @@ typedef struct s_process
 	char		*heredoc;
 }				t_process;
 
+typedef struct s_var
+{
+	t_list	*env_list;
+	int		exit_status;
+}			t_var;
+
+//Check syntax
+
+int				ft_check_syntax(char *line);
+
 //Parser
 
-t_list			*parser(char *line, t_list *env);
+t_list			*parser(char *line, t_list *env, int var);
 void			get_process_list(char **str_process, t_list **list);
 void			parse_list(t_list *process_list, t_list *env);
 t_process		*parse_process(void *str_process, t_list *env);

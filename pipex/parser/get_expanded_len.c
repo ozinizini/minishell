@@ -6,7 +6,7 @@
 /*   By: arosas-j <arosas-j@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:58:10 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/09 14:23:55 by arosas-j         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:01:55 by arosas-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ size_t	get_expanded_len(char *line, t_list *env)
 			len += (skip_single_quotes(line, i) - i);
 			i = skip_single_quotes(line, i);
 		}
-		else if (line[i] == '$'
-			&& (ft_isalnum(line[i + 1]) || line[i + 1] == '_'))
+		else if (line[i] == '$' && (ft_isalnum(line[i + 1])
+				|| line[i + 1] == '_' || line[i + 1] == '?'))
 		{
 			len += get_variable_size(line + i, env);
 			i = skip_variable(line, i);
