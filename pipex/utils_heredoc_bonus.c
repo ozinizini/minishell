@@ -6,62 +6,14 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 17:10:07 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/12 15:56:16 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 10:46:26 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils_heredoc_bonus.h"
 #include "utils_error_messages.h"
 #include "./parser/minishell.h"
-
-char	*create_heredoc_filename(int here_doc_process_counter)
-{
-	char	*here_doc_process_counter_char;
-	char	*here_doc_name;
-
-	here_doc_name = malloc(sizeof(char) * 17);
-	if (here_doc_name == NULL)
-		error_message("Error: Memory allocation failed\n");
-	ft_strlcpy(here_doc_name, "/tmp/here_doc_", 16);
-	here_doc_process_counter_char = ft_itoa(here_doc_process_counter);
-	if (here_doc_process_counter_char == NULL)
-		error_message("Error: Memory allocation failed\n");
-	ft_strlcat(here_doc_name, here_doc_process_counter_char, 16);
-	free(here_doc_process_counter_char);
-	here_doc_process_counter_char = NULL;
-	return (here_doc_name);
-}
-
-int	create_heredoc_file(char *delimiter, char *here_doc_filename)
-{
-	int		fd;
-	char	buffer[BUFFER_SIZE];
-	ssize_t	bytes_read;
-
-	fd = open(here_doc_filename, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	if (fd == -1)
-		return (0);
-	bytes_read = 1;
-	while (bytes_read > 0)
-	{
-		ft_putstr_fd("> ", STDOUT_FILENO);
-		ft_memset(buffer, 0, sizeof(buffer));
-		bytes_read = read(STDIN_FILENO, buffer, BUFFER_SIZE);
-		if (bytes_read == -1)
-		{
-			close(fd);
-			unlink(here_doc_filename);
-			//ft_putstr_fd("Error: read failed in heredoc", STDERR_FILENO);
-			// /tmp/.heredocs
-			return (0);
-		}
-		if (ft_strncmp(buffer, delimiter, ft_strlen(buffer) - 1) == 0)
-			break ;
-		ft_putstr_fd(buffer, fd);
-	}
-	close(fd);
-	return (1);
-}
+#include "utils_heredoc_file.h"
 
 int	handle_heredoc(t_list *list, t_list *redirect,
 	int here_doc_process_counter)

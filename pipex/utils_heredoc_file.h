@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_heredoc_bonus.h                              :+:      :+:    :+:   */
+/*   utils_heredoc_file.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/29 17:10:47 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/14 10:49:23 by ozini            ###   ########.fr       */
+/*   Created: 2024/05/14 10:44:01 by ozini             #+#    #+#             */
+/*   Updated: 2024/05/14 10:50:14 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_HEREDOC_BONUS_H
-# define UTILS_HEREDOC_BONUS_H
+#ifndef UTILS_HEREDOC_FILE_H
+# define UTILS_HEREDOC_FILE_H
 
 # define BUFFER_SIZE 1024
 
@@ -24,9 +24,7 @@
 # include <errno.h>
 # include <string.h>
 
-int		handle_heredoc(t_list *list, t_list *redirect,
-			int here_doc_process_counter);
-void	handle_infile(t_list *list);
-void	init_heredocs(t_list *list);
+char	*create_heredoc_filename(int here_doc_process_counter);
+int		create_heredoc_file(char *delimiter, char *here_doc_filename);
 
 #endif

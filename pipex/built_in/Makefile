@@ -1,6 +1,6 @@
 NAME = built_in.a
 CC = gcc -c
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 INCLUDES = -I./Libft
 
 SOURCES = built_in_error_messages.c built_in_utils.c env_variable_string_functions.c export_variables_functions.c ft_cd.c ft_echo.c ft_env.c ft_exit.c ft_export.c ft_pwd.c ft_unset.c
