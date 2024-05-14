@@ -6,7 +6,7 @@
 /*   By: arosas-j <arosas-j@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:56:44 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/08 17:00:49 by arosas-j         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:44:26 by arosas-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 size_t	skip_variable(char *line, size_t i)
 {
 	i++;
-	while (ft_isalnum(line[i]) || line[i] == '_')
+	while (ft_isalnum(line[i]) || line[i] == '_' || line[i] == '?')
 	{
 		i++;
 	}
@@ -45,7 +45,7 @@ char	*get_variable_name(char *str)
 
 	i = 1;
 	variable_name = NULL;
-	while (ft_isalnum(str[i]) || str[i] == '_')
+	while (ft_isalnum(str[i]) || str[i] == '_' || str[i] == '?')
 		i++;
 	i--;
 	variable_name = ft_substr(str, 1, i);

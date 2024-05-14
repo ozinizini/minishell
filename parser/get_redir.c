@@ -6,7 +6,7 @@
 /*   By: arosas-j <arosas-j@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:13:00 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/10 17:38:50 by arosas-j         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:01:21 by arosas-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	add_redir_list(char *ptr, t_process *process, t_list *env)
 
 	redir = split_redir(ptr);
 	redir->name = expander(redir->name, env);
+	redir->name = ft_clean_quotes(redir->name);
 	redir_list = ft_lstnew(redir);
 	ft_lstadd_back(&process->redirections, redir_list);
 }
@@ -98,6 +99,7 @@ void	get_redir(char *str_process, t_process *process, t_list *env)
 			i = 0;
 			continue ;
 		}
-		i++;
+		if (str_process[i])
+			i++;
 	}
 }

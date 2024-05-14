@@ -6,13 +6,13 @@
 /*   By: arosas-j <arosas-j@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:18:19 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/12 14:03:01 by arosas-j         ###   ########.fr       */
+/*   Updated: 2024/05/14 16:01:34 by arosas-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_quotes(char *line)
+static int	check_quotes(char *line)
 {
 	size_t	i;
 	char	c;
@@ -34,7 +34,7 @@ int	check_quotes(char *line)
 	return (0);
 }
 
-int	check_pipes(char *line)
+static int	check_pipes(char *line)
 {
 	size_t	i;
 
@@ -61,6 +61,15 @@ int	check_pipes(char *line)
 	return (0);
 }
 
+static int	check_char(char *line, size_t i)
+{
+	if (line[i] == line[i + 1])
+		i++;
+	if (line[i + 1] == '<' || line[i + 1] == '>')
+		return (0);
+	return (1);
+}
+
 int	check_redir(char *line)
 {
 	size_t	i;
@@ -70,6 +79,8 @@ int	check_redir(char *line)
 	{
 		if (line[i] == '<' || line[i] == '>')
 		{
+			if (!check_char(line, i))
+				return (3);
 			while (line[i] == '<' || line[i] == '>')
 				i++;
 			while (line[i] == ' ')
@@ -89,10 +100,20 @@ int	ft_check_syntax(char *line)
 	int		check;
 
 	check = 0;
-	check = check_quotes(line);
-	if (check == 0)
-		check = check_pipes(line);
-	if (check == 0)
-		check = check_redir(line);
+	if (check_quotes(line))
+	{
+		write(2, "minishell: syntax error: unclosed quotes\n", 42);
+		return (258);
+	}
+	if (check_pipes(line))
+	{
+		write(2, "minishell: syntax error: empty pipe\n", 37);
+		return (258);
+	}
+	if (check_redir(line))
+	{
+		write(2, "minishell: syntax error: invalid redirection\n", 46);
+		return (258);
+	}
 	return (check);
 }
