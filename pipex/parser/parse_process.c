@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 16:39:24 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/14 19:06:24 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 19:41:01 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,6 @@ t_process	*parse_process(void *str_process, t_list *env)
 	str_process = expander(str_process, env);
 	process->command = ft_split_words(str_process);
 	free(str_process);
-	if (!process->command[0])
-	{
-		free(process->command);
-		process->command = NULL;
-	}
 	while (process->command && process->command[i])
 	{
 		process->command[i] = ft_clean_quotes(process->command[i]);
