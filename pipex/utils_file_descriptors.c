@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:51:26 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/14 15:02:27 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 21:34:01 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	handle_file_descriptors(t_list *list)
 {
 	t_list	*redirections;
 
+	redirections = NULL;
 	redirections = ((t_process *)list->content)->redirections;
 	while (redirections != NULL)
 	{
@@ -53,7 +54,7 @@ int	handle_file_descriptors(t_list *list)
 			handle_fd_outfile_append(list, redirections);
 		if (((t_process *)list->content)->fd_infile == -1)
 		{
-			if (!((t_process *)list->content)->fd_outfile)
+			if (((t_process *)list->content)->fd_outfile)
 				close(((t_process *)list->content)->fd_outfile);
 			bash_error_message(strerror(errno),
 				((t_redir *)redirections->content)->name);

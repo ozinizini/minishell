@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:31:33 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/14 18:49:28 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 21:41:38 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,16 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argv;
 	(void)argc;
-	//atexit(ft_leaks);
+	atexit(ft_leaks);
 	exit_status = 0;
 	getcwd(cwd, sizeof(cwd));
 	env_list = create_env_list(env);
 	export_list = create_env_list(env);
 	while (1)
 	{
+		//input = NULL;
 		input = readline("Minishell$ ");
+		//printf("INPUT: %s", input);
 		if (ft_strlen(input))
 		{
 			add_history(input);
@@ -54,7 +56,7 @@ int	main(int argc, char **argv, char **env)
 			exit_status = run_prompt(processes, &env_list, &export_list);
 			}
 			free(input);
-			clean_up_processes_list(processes);
+			clean_up_processes_list(processes, &input);
 			processes = NULL;
 			//printf("exit_status: %d\n", exit_status);
 		}

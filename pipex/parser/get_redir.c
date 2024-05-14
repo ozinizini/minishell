@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:13:00 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/14 18:18:49 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 21:02:04 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char	*get_file_str(char *redir_str)
 	size_t	i;
 	size_t	start;
 
+	file_str = NULL;
 	i = 0;
 	while (redir_str[i] == '>' || redir_str[i] == '<')
 		i++;
@@ -64,6 +65,7 @@ t_redir	*split_redir(char *ptr)
 {
 	t_redir	*redir;
 
+	redir = NULL;
 	redir = malloc(sizeof(t_redir));
 	if (!redir)
 		return (NULL);
@@ -77,8 +79,10 @@ void	add_redir_list(char *ptr, t_process *process, t_list *env)
 	t_list	*redir_list;
 	t_redir	*redir;
 
+	redir_list = NULL;
+	redir = NULL;
 	redir = split_redir(ptr);
-	redir->name = expander(redir->name, env);
+ 	redir->name = expander(redir->name, env);
 	redir->name = ft_clean_quotes(redir->name);
 	redir_list = ft_lstnew(redir);
 	ft_lstadd_back(&process->redirections, redir_list);

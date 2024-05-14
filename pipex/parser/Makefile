@@ -5,7 +5,7 @@ FLAGS =	-Wall -Wextra -Werror -g
 HEADER = minishell.h
 SRC =	parser.c parse_process.c ft_clean_quotes.c quotes.c ft_split_words.c\
 		get_redir.c get_redir_type.c ft_split_process.c ft_check_syntax.c\
-		expander.c get_expanded_len.c expander_utils.c
+		expander.c get_expanded_len.c expander_utils.c check_empty.c
 OBJ =	$(SRC:.c=.o)
 
 all:$(NAME)
