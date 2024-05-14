@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 14:02:35 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/12 16:46:53 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 16:56:00 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int	ft_echo(char **command, int number_of_arguments)
 	{
 		if (i == 1)
 		{
-			while ((!ft_strcmp("-n", (const char *)command[i])) && command[i])
+			while (command[i] && (!ft_strcmp("-n", (const char *)command[i])))
 			{
 				n_option_flag = 1;
 				i++;
 			}
-			if (!command)
+			if (!command[i])
 				break ;
 		}
 		printf("%s", command[i]);
