@@ -6,13 +6,11 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:49:31 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/13 15:38:02 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 15:03:28 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils_paths.h"
-#include "utils_error_messages.h"
-#include "utils_memory_management.h"
+#include "execute.h"
 
 static int	create_path(char *env, char *command, char *concatenated)
 {

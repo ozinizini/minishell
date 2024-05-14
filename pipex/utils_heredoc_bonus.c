@@ -6,16 +6,13 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 17:10:07 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/14 13:43:18 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 15:02:48 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils_heredoc_bonus.h"
-#include "utils_error_messages.h"
-#include "./parser/minishell.h"
-#include "utils_heredoc_file.h"
+#include "execute.h"
 
-int	handle_heredoc(t_list *list, t_list *redirect,
+static int	handle_heredoc(t_list *list, t_list *redirect,
 	int here_doc_process_counter)
 {
 	char	*here_doc_name;
@@ -41,7 +38,7 @@ int	handle_heredoc(t_list *list, t_list *redirect,
 	}
 }
 
-void	handle_infile(t_list *list)
+static void	handle_infile(t_list *list)
 {
 	if (((t_process *)list->content)->heredoc)
 	{

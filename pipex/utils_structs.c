@@ -6,15 +6,11 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:03:10 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/14 13:42:07 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 15:14:22 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils_structs.h"
-#include "utils_error_messages.h"
-#include "../built_in/built_in.h"
-#include "utils_memory_management.h"
-#include "./parser/minishell.h"
+#include "execute.h"
 
 char	**string_list_to_bidimensional_array(t_list *env)
 {

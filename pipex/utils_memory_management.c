@@ -6,11 +6,11 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:36:14 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/10 17:42:19 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 15:03:11 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils_memory_management.h"
+#include "execute.h"
 
 int	count_strings(char **str)
 {
@@ -61,7 +61,7 @@ void	free_2d_char_array(char **array)
 	int	i;
 
 	i = 0;
-	while (array[i] != NULL)
+	while (array && array[i] != NULL)
 	{
 		free(array[i]);
 		i++;

@@ -6,20 +6,11 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:12:03 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/14 11:55:17 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 15:01:48 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils_error_messages.h"
-#include "utils_memory_management.h"
-#include "utils_paths.h"
-#include "utils_processes.h"
-#include "utils_processes_bonus.h"
-#include "utils_file_descriptors.h"
-#include "pipex_bonus.h"
-#include "utils_heredoc_bonus.h"
-#include "utils_structs.h"
-#include "utils_run_built_in.h"
+#include "execute.h"
 #include "./parser/minishell.h"
 
 static int	return_exit_status(t_prompt *prompt, pid_t *pidc_array)
@@ -105,7 +96,7 @@ static int	handle_processes_bonus(t_list *processes, t_prompt *prompt)
 	return (return_exit_status(prompt, pidc_array));
 }
 
-int	pipex(t_list *processes, t_list **env, t_list **export_list)
+int	run_prompt(t_list *processes, t_list **env, t_list **export_list)
 {
 	t_prompt	*prompt;
 	int			exit_status;

@@ -6,17 +6,11 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:49:58 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/13 12:58:04 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/14 15:04:18 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils_processes.h"
-#include "utils_error_messages.h"
-#include "utils_memory_management.h"
-#include "utils_paths.h"
-#include "./parser/minishell.h"
-#include "../built_in/built_in.h"
-#include "utils_run_built_in.h"
+#include "execute.h"
 
 static void	execute_command(t_list *list, char **env, char *command_path)
 {
