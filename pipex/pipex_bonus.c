@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:12:03 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/14 21:39:27 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/15 11:52:40 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,11 @@ int	run_prompt(t_list *processes, t_list **env, t_list **export_list)
 	init_heredocs(processes);
 	if (prompt->number_of_processes == 1
 		&& !((t_process *)processes->content)->command)
-		{
-			exit_status = handle_file_descriptors(processes);
-			if(exit_status == -1)
-				exit_status = 1;
-		}
-		
+	{
+		exit_status = handle_file_descriptors(processes);
+		if (exit_status == -1)
+			exit_status = 1;
+	}
 	else if (prompt->number_of_processes == 1
 		&& is_built_in(((t_process *)processes->content)->command[0]))
 		exit_status = lonesome_built_in(processes, &prompt);

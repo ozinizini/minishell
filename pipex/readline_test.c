@@ -6,10 +6,9 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:31:33 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/14 21:41:38 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/15 11:07:19 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -55,11 +54,10 @@ int	main(int argc, char **argv, char **env)
 			processes = parser(input, env_list, exit_status);
 			exit_status = run_prompt(processes, &env_list, &export_list);
 			}
-			free(input);
 			clean_up_processes_list(processes, &input);
 			processes = NULL;
-			//printf("exit_status: %d\n", exit_status);
 		}
+		free(input);
 	}
 	while (env_list != NULL)
 	{

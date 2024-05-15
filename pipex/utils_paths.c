@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:49:31 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/14 15:03:28 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/15 11:51:50 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,10 @@ char	*check_path(char *command, char **env)
 	}
 	else if (create_path(env[path_env_pos], command, concatenated) == 1)
 		return (free(concatenated), NULL);
-	else if ((create_path(env[path_env_pos], command, concatenated) == 0)
-		&& concatenated[0] == '\0')
+	else if (concatenated[0] == '\0')
 		return (free(concatenated), ft_strdup(command));
+	/* else if ((create_path(env[path_env_pos], command, concatenated) == 0)
+		&& concatenated[0] == '\0')
+		return (free(concatenated), ft_strdup(command)); */
 	return (concatenated);
 }
