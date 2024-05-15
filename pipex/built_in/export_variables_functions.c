@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 11:54:40 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/08 18:09:58 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/15 16:08:22 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ static	int	join_variable_content(t_list *temp, char *export_variable)
 
 	new_added_content = ft_strnstr(export_variable,
 			"=", ft_strlen(export_variable));
-	new_added_content++;
+	if (ft_strnstr((char *)temp->content, "=",
+			ft_strlen((char *)temp->content)))
+		new_added_content++;
 	new_variable_content = ft_strjoin((const char *)
 			temp->content, new_added_content);
 	if (new_variable_content == NULL)
