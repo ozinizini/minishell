@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:27:28 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/14 15:04:03 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/15 14:46:57 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	infile_child_process_bonus(t_list *process, t_prompt *prompt,
 			handle_dups(process, NULL, NULL);
 		if ((((t_process *)process->content)->heredoc))
 			unlink((((t_process *)process->content)->heredoc));
+		if (!(((t_process *)process->content)->command))
+			exit(EXIT_SUCCESS);
 		exec_first_child(process, prompt, fd_pipe);
 	}
 	else if (fd_pipe)
@@ -104,6 +106,8 @@ void	intermediate_children_process(t_list *process, t_prompt *prompt,
 		handle_dups(process, fd_pipe, fd_pipe2);
 		if ((((t_process *)process->content)->heredoc))
 			unlink((((t_process *)process->content)->heredoc));
+		if (!(((t_process *)process->content)->command))
+			exit(EXIT_SUCCESS);
 		exec_intermediate_child(process, prompt, fd_pipe, fd_pipe2);
 	}
 	else
@@ -129,6 +133,8 @@ void	outfile_child_process_bonus(t_list *process,
 		handle_dups(process, fd_pipe, NULL);
 		if ((((t_process *)process->content)->heredoc))
 			unlink((((t_process *)process->content)->heredoc));
+		if (!(((t_process *)process->content)->command))
+			exit(EXIT_SUCCESS);
 		exec_last_child(process, prompt, fd_pipe);
 	}
 	else
