@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:51:26 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/16 14:47:21 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/16 17:09:04 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 
 static void	handle_fd_infile(t_list *list, t_list *redirections)
 {
-	if (((t_process *)list->content)->heredoc)
-		return ;
 	if (((t_process *)list->content)->fd_infile)
 		close(((t_process *)list->content)->fd_infile);
 	((t_process *)list->content)->fd_infile = open(((t_redir *)
 				redirections->content)->name, O_RDONLY);
+	if (((t_process *)list->content)->fd_infile == -1)
+		return ;
+	else if (((t_process *)list->content)->heredoc)
+	{
+		close(((t_process *)list->content)->fd_infile);
+		((t_process *)list->content)->fd_infile = 0;
+	}
 }
 
 static void	handle_fd_outfile_truncate(t_list *list, t_list *redirections)
@@ -58,6 +63,8 @@ int	handle_file_descriptors(t_list *list)
 		{
 			if (((t_process *)list->content)->fd_outfile)
 				close(((t_process *)list->content)->fd_outfile);
+			if ((((t_process *)list->content)->heredoc))
+				unlink((((t_process *)list->content)->heredoc));
 			bash_error_message(strerror(errno),
 				((t_redir *)redirections->content)->name);
 			return (-1);
