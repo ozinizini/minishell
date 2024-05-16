@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:31:33 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/16 13:00:34 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/16 16:04:42 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 #include "utils_structs.h"
 #include "./parser/minishell.h"
 
-
-void ft_leaks()
+void	ft_leaks(void)
 {
 	system("leaks -q minishell");
 }

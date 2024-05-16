@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_env_export_lists.c                           :+:      :+:    :+:   */
+/*   execution_env_export_lists.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:46:54 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/14 15:01:58 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/16 15:52:55 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_list	*create_env_list(char **env)
 	node = NULL;
 	while (env[i] != NULL)
 	{
-		if (!(strncmp("SHLVL=", env[i], 6)))
+		if (!(ft_strncmp("SHLVL=", env[i], 6)))
 		{
 			shlvl_exists = 1;
 			node = set_shlvl(env[i], 1);
