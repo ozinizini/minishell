@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_processes.c                                  :+:      :+:    :+:   */
+/*   execute_child.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:49:58 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/15 14:44:14 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/16 10:30:41 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	exec_first_child(t_list *list, t_prompt *prompt, int **fd_pipe)
 		close(fd_pipe[0][1]);
 	if (is_built_in(((t_process *)list->content)->command[0]))
 		exit(run_built_in(((t_process *)list->content)->command, &prompt));
-	env_array = string_list_to_bidimensional_array(prompt->env);
+	env_array = string_list_to_bidimensional_array(*prompt->env);
 	if (env_array == NULL)
 		error_message("Error: Memory allocation failed\n");
 	command_path = check_path(((t_process *)list->content)
@@ -63,7 +63,7 @@ void	exec_last_child(t_list *list, t_prompt *prompt, int *fd_pipe)
 	close(fd_pipe[0]);
 	if (is_built_in(((t_process *)list->content)->command[0]))
 		exit(run_built_in(((t_process *)list->content)->command, &prompt));
-	env_array = string_list_to_bidimensional_array(prompt->env);
+	env_array = string_list_to_bidimensional_array(*prompt->env);
 	if (env_array == NULL)
 		error_message("Error: Memory allocation failed\n");
 	command_path = check_path(((t_process *)list->content)
@@ -92,7 +92,7 @@ void	exec_intermediate_child(t_list *list, t_prompt *prompt,
 	close(fd_pipe2[1]);
 	if (is_built_in(((t_process *)list->content)->command[0]))
 		exit(run_built_in(((t_process *)list->content)->command, &prompt));
-	env_array = string_list_to_bidimensional_array(prompt->env);
+	env_array = string_list_to_bidimensional_array(*prompt->env);
 	if (env_array == NULL)
 		error_message("Error: Memory allocation failed\n");
 	command_path = check_path(((t_process *)list->content)

@@ -15,19 +15,19 @@ FUNC_SRC_DIR = ./Libft
 
 LIB = ./Libft/libft.a
 
-SRCS =	./pipex_bonus.c\
-		./utils_error_messages.c\
-		./utils_memory_management.c\
-		./utils_paths.c\
-		./utils_processes.c\
-		./utils_processes_bonus.c\
-		./utils_heredoc_bonus.c\
-		./utils_heredoc_file.c\
+SRCS =	./execution.c\
+		./execution_error_messages.c\
+		./execution_memory_management.c\
+		./execution_paths.c\
+		./execute_child.c\
+		./setting_up_children_built_ins.c\
+		./execution_heredoc_management.c\
+		./execution_heredoc_file.c\
 		./utils_structs.c\
-		./utils_file_descriptors.c\
-		./utils_run_built_in.c\
-		./utils_env_export_lists.c\
-		./readline_test.c
+		./execution_file_descriptors.c\
+		./execution_run_built_in.c\
+		./execution_env_export_lists.c\
+		./main.c
 
 OBJS = ${SRCS:.c=.o}
 
