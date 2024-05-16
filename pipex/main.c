@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:31:33 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/16 11:16:29 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/16 11:27:11 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,15 @@ void ft_leaks()
 {
 	system("leaks -q minishell");
 }
-int	main(int argc, char **argv, char **env)
+
+void	initialize_minishell(int exit_status,
+	t_list *env_list, t_list *export_list)
 {
-	char	cwd[1024];
 	char	*input;
 	t_list	*processes;
-	t_list	*env_list;
-	t_list	*export_list;
-	int		exit_status;
 
-	(void)argv;
-	(void)argc;
-	atexit(ft_leaks);
-	exit_status = 0;
-	getcwd(cwd, sizeof(cwd));
-	env_list = create_env_list(env);
-	export_list = create_env_list(env);
+	processes = NULL;
+	input = NULL;
 	while (1)
 	{
 		input = readline("Minishell$ ");
@@ -57,6 +50,21 @@ int	main(int argc, char **argv, char **env)
 		}
 		free(input);
 	}
+}
+
+int	main(int argc, char **argv, char **env)
+{
+	t_list	*env_list;
+	t_list	*export_list;
+	int		exit_status;
+
+	(void)argv;
+	(void)argc;
+	atexit(ft_leaks);
+	exit_status = 0;
+	env_list = create_env_list(env);
+	export_list = create_env_list(env);
+	initialize_minishell(exit_status, env_list, export_list);
 	clean_up_env_export_list(env_list, export_list);
 	return (exit_status);
 }
