@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:03:10 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/14 20:42:04 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/16 09:52:54 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ t_prompt	*init_prompt(t_list *processes, t_list **env, t_list **export_list)
 			error_message(strerror(errno));
 		}
 	}
-	prompt->env = *env;
-	prompt->export_list = *export_list;
+	prompt->env = env;
+	prompt->export_list = export_list;
 	return (prompt);
 }
 

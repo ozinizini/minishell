@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 17:38:21 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/14 16:48:06 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/16 09:55:04 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ int	run_built_in(char **command, t_prompt **prompt)
 		exit_status = ft_pwd();
 	else if (ft_strcmp(command[0], "cd") == 0)
 		exit_status = ft_cd(command[1],
-				&(*prompt)->env, &(*prompt)->export_list);
+				(*prompt)->env, (*prompt)->export_list);
 	else if (ft_strcmp(command[0], "env") == 0)
-		exit_status = ft_env((*prompt)->env);
+		exit_status = ft_env(*(*prompt)->env);
 	else if (ft_strcmp(command[0], "export") == 0)
-		exit_status = handle_variables_export(&(*prompt)->env,
-				&(*prompt)->export_list, command,
+		exit_status = handle_variables_export((*prompt)->env,
+				(*prompt)->export_list, command,
 				count_strings(command) - 1);
 	else if (ft_strcmp(command[0], "unset") == 0)
-		exit_status = handle_variables_unset(&(*prompt)->env,
-				&(*prompt)->export_list, command,
+		exit_status = handle_variables_unset((*prompt)->env,
+				(*prompt)->export_list, command,
 				count_strings(command) - 1);
 	else if (ft_strcmp(command[0], "exit") == 0)
 		ft_exit(command[1], &exit_status,
