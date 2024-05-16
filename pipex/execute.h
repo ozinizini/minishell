@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 14:20:09 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/14 20:39:51 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/16 11:06:57 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ void		exec_last_child(t_list *list, t_prompt *prompt, int *fd_pipe);
 //Utils
 t_prompt	*init_prompt(t_list *processes, t_list **env, t_list **export_list);
 void		free_prompt(t_prompt *test);
-void		clean_up_processes_list(t_list *list, char **input);
+void		clean_up_processes_list(t_list *list);
+void		clean_up_env_export_list(t_list *env_list, t_list *export_list);
 char		**string_list_to_bidimensional_array(t_list *env);
 
 #endif

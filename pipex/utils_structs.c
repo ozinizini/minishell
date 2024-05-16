@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:03:10 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/16 09:52:54 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/16 11:05:58 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,12 @@ void	free_prompt(t_prompt *prompt)
 	free(prompt);
 }
 
-void	clean_up_processes_list(t_list *list, char **input)
+void	clean_up_processes_list(t_list *list)
 {
 	t_process	*process;
 	t_list		*redirec_list;
 	t_redir		*redirec;
 
-	(void)input;
 	process = NULL;
 	redirec_list = NULL;
 	redirec = NULL;
@@ -103,5 +102,26 @@ void	clean_up_processes_list(t_list *list, char **input)
 		free(process);
 		free(list);
 		list = list ->next;
+	}
+}
+
+void	clean_up_env_export_list(t_list *env_list, t_list *export_list)
+{
+	t_list	*temp;
+
+	temp = NULL;
+	while (env_list != NULL)
+	{
+		temp = env_list->next;
+		free(env_list->content);
+		free(env_list);
+		env_list = temp;
+	}
+	while (export_list != NULL)
+	{
+		temp = export_list->next;
+		free(export_list->content);
+		free(export_list);
+		export_list = temp;
 	}
 }
