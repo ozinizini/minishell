@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:31:33 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/15 11:07:19 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/16 10:11:47 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ int	main(int argc, char **argv, char **env)
 	export_list = create_env_list(env);
 	while (1)
 	{
-		//input = NULL;
 		input = readline("Minishell$ ");
-		//printf("INPUT: %s", input);
-		if (ft_strlen(input))
+		if (input && ft_strlen(input))
 		{
 			add_history(input);
 			if(ft_check_syntax(input))
