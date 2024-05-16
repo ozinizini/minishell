@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_bonus.c                                      :+:      :+:    :+:   */
+/*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:12:03 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/15 11:52:40 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/16 12:17:41 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,10 @@ int	run_prompt(t_list *processes, t_list **env, t_list **export_list)
 	if (prompt->number_of_processes == 1
 		&& !((t_process *)processes->content)->command)
 	{
+		if ((((t_process *)processes->content)->heredoc))
+			unlink((((t_process *)processes->content)->heredoc));
 		exit_status = handle_file_descriptors(processes);
+		close_file_descriptors(processes);
 		if (exit_status == -1)
 			exit_status = 1;
 	}
@@ -119,6 +122,5 @@ int	run_prompt(t_list *processes, t_list **env, t_list **export_list)
 		exit_status = lonesome_built_in(processes, &prompt);
 	else
 		exit_status = handle_processes_bonus(processes, prompt);
-	free_prompt(prompt);
-	return (exit_status);
+	return (free_prompt(prompt), exit_status);
 }

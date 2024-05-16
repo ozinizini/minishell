@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_file_descriptors.c                           :+:      :+:    :+:   */
+/*   execution_file_descriptors.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:51:26 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/14 21:34:01 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/16 14:47:21 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	handle_fd_infile(t_list *list, t_list *redirections)
 {
+	if (((t_process *)list->content)->heredoc)
+		return ;
 	if (((t_process *)list->content)->fd_infile)
 		close(((t_process *)list->content)->fd_infile);
 	((t_process *)list->content)->fd_infile = open(((t_redir *)

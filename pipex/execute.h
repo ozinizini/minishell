@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 14:20:09 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/16 11:06:57 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/16 12:01:00 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void		exec_intermediate_child(t_list *list, t_prompt *prompt,
 void		outfile_child_process_bonus(t_list *process,
 				t_prompt *prompt, int *fd_pipe);
 void		exec_last_child(t_list *list, t_prompt *prompt, int *fd_pipe);
+void		close_file_descriptors(t_list *list);
 
 //Utils
 t_prompt	*init_prompt(t_list *processes, t_list **env, t_list **export_list);

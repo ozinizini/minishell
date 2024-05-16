@@ -6,11 +6,19 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:49:58 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/16 10:30:41 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/16 12:01:28 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
+
+void	close_file_descriptors(t_list *list)
+{
+	if (((t_process *)list->content)->fd_infile)
+		close(((t_process *)list->content)->fd_infile);
+	if (((t_process *)list->content)->fd_outfile)
+		close(((t_process *)list->content)->fd_outfile);
+}
 
 static void	execute_command(t_list *list, char **env, char *command_path)
 {
@@ -21,6 +29,7 @@ static void	execute_command(t_list *list, char **env, char *command_path)
 	}
 	else
 	{
+		close_file_descriptors(list);
 		bash_error_message("command not found", command_path);
 		exit(127);
 	}
