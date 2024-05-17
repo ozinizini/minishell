@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:17:35 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/08 18:09:44 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/17 13:30:52 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,21 @@ static	void	delete_first_node(t_list **list)
 static	void	delete_node_other_than_first(t_list **list, int node_position)
 {
 	t_list	*temp;
+	t_list	*delete_node;
 	int		node_index;
 
 	temp = *list;
+	delete_node = NULL;
 	node_index = 1;
 	while (node_index < node_position)
 	{
 		if (node_index == node_position - 1)
 		{
-			free(temp->next->content);
-			free(temp->next);
+			delete_node = temp->next;
 			temp->next = temp->next->next;
 			temp = temp->next;
+			free(delete_node->content);
+			free(delete_node);
 		}
 		else
 			temp = (temp->next);
