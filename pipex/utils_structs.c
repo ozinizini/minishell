@@ -6,39 +6,11 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:03:10 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/17 10:42:20 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/17 11:03:28 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
-
-char	**string_list_to_bidimensional_array(t_list *env)
-{
-	char	**env_variables;
-	int		i;
-
-	env_variables = NULL;
-	i = 0;
-	env_variables = malloc(sizeof(char *) * (ft_lstsize(env) + 1));
-	if (env_variables == NULL)
-		return (NULL);
-	while (env != NULL)
-	{
-		env_variables[i] = malloc(sizeof(char)
-				* (ft_strlen((const char *)env->content) + 1));
-		if (env_variables[i] == NULL)
-		{
-			free_2d_char_array(env_variables);
-			return (NULL);
-		}
-		ft_strlcat(env_variables[i], (const char *)env->content,
-			ft_strlen((const char *)env->content) + 1);
-		i++;
-		env = env -> next;
-	}
-	env_variables[i] = NULL;
-	return (env_variables);
-}
 
 t_prompt	*init_prompt(t_list *processes, t_list **env, t_list **export_list)
 {

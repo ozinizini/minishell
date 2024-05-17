@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 14:20:09 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/17 10:44:09 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/17 11:04:04 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int			run_prompt(t_list *processes, t_list **env, t_list **export_list);
 //This function handles the initialization of the list that is a copy
 //of the environment variables (**env)
 t_list		*create_env_list(char **env);
+char		**string_list_to_bidimensional_array(t_list *env);
 void		clean_up_env_export_list(t_list *env_list, t_list *export_list);
 
 //Functions that handle the errors shown on the terminal
@@ -85,7 +86,5 @@ void		close_file_descriptors(t_list *list);
 t_prompt	*init_prompt(t_list *processes, t_list **env, t_list **export_list);
 void		free_prompt(t_prompt *test);
 void		clean_up_processes_list(t_list *list);
-void		clean_up_env_export_list(t_list *env_list, t_list *export_list);
-char		**string_list_to_bidimensional_array(t_list *env);
 
 #endif

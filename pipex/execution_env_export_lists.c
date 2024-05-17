@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:46:54 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/17 10:41:54 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/17 11:03:36 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,34 @@ t_list	*create_env_list(char **env)
 	if (!shlvl_exists)
 		start_shlvl(&list);
 	return (list);
+}
+
+char	**string_list_to_bidimensional_array(t_list *env)
+{
+	char	**env_variables;
+	int		i;
+
+	env_variables = NULL;
+	i = 0;
+	env_variables = malloc(sizeof(char *) * (ft_lstsize(env) + 1));
+	if (env_variables == NULL)
+		return (NULL);
+	while (env != NULL)
+	{
+		env_variables[i] = malloc(sizeof(char)
+				* (ft_strlen((const char *)env->content) + 1));
+		if (env_variables[i] == NULL)
+		{
+			free_2d_char_array(env_variables);
+			return (NULL);
+		}
+		ft_strlcat(env_variables[i], (const char *)env->content,
+			ft_strlen((const char *)env->content) + 1);
+		i++;
+		env = env -> next;
+	}
+	env_variables[i] = NULL;
+	return (env_variables);
 }
 
 void	clean_up_env_export_list(t_list *env_list, t_list *export_list)
