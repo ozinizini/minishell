@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
-INCLUDES = -I./Libft -I./built_in -I./parser
-LDFLAGS = -lreadline
+INCLUDES = -I./Libft -I./built_in -I./parser -I$(HOME)/.brew/opt/readline/include
+LDFLAGS = -lreadline -L$(HOME)/.brew/opt/readline/lib
 
 FUNC_SRC_BUILT_IN = ./built_in
 

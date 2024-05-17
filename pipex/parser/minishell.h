@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
+/*   By: arosas-j <arosas-j@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:57:23 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/14 19:42:07 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/17 18:31:22 by arosas-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include <stdlib.h>
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <signal.h>
+# include <termios.h>
 # include "../Libft/libft.h"
 
 typedef enum e_File_Type
@@ -94,5 +99,14 @@ char			*get_variable_value(char *variable_name, t_list *env);
 char			*get_variable_name(char *str);
 int				compare_name(char *variable_name, char *env);
 size_t			skip_variable(char *line, size_t i);
+
+//Signals
+void			quit_handler(int sig);
+void			int_handler(int sig);
+void			int_exe_sig(int sig);
+void			int_heredoc(int sig);
+void			set_echoctl(int fd, int enable);
+
+extern	int	g_sig;
 
 #endif

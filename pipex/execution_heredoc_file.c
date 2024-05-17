@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_heredoc_file.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
+/*   By: arosas-j <arosas-j@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 10:43:19 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/17 22:31:39 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/17 22:58:36 by arosas-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,6 @@ static	int	delimiter_vs_input(char *delimiter, char *buffer)
 		return (0);
 }
 
-
-
-void signal_handler(int signum) {
-    (void)signum;
-	printf("\n");
-	//write(STDOUT_FILENO, "\nReceived signal\n", 16);
-}
-
 int	create_heredoc_file(char *delimiter, char *here_doc_filename)
 {
     struct sigaction sa;
@@ -69,11 +61,9 @@ int	create_heredoc_file(char *delimiter, char *here_doc_filename)
     char	buffer[BUFFER_SIZE];
     ssize_t	bytes_read;
 
-    sa.sa_handler = signal_handler;
+    sa.sa_handler = int_heredoc;
     sa.sa_flags = 0;
-
     sigaction(SIGINT, &sa, NULL);
-
     bytes_read = 1;
     fd = open(here_doc_filename, O_WRONLY | O_CREAT | O_TRUNC, 0777);
     if (fd == -1)
@@ -82,13 +72,13 @@ int	create_heredoc_file(char *delimiter, char *here_doc_filename)
     {
         ft_putstr_fd("> ", STDOUT_FILENO);
         ft_memset(buffer, 0, sizeof(buffer));
+        set_echoctl(0, 0);
         bytes_read = read(STDIN_FILENO, buffer, BUFFER_SIZE);
+        set_echoctl(0, 1);
         if (bytes_read == -1)
         {
-			if (errno == EINTR) {
-                // Handle the interruption here
+			if (errno == EINTR)
                 continue;
-            }
             return (heredoc_read_error(fd, here_doc_filename));
         }
         if (delimiter_vs_input(delimiter, buffer))
