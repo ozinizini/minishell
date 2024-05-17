@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:46:54 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/16 15:52:55 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/17 10:41:54 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,25 @@ t_list	*create_env_list(char **env)
 	if (!shlvl_exists)
 		start_shlvl(&list);
 	return (list);
+}
+
+void	clean_up_env_export_list(t_list *env_list, t_list *export_list)
+{
+	t_list	*temp;
+
+	temp = NULL;
+	while (env_list != NULL)
+	{
+		temp = env_list;
+		env_list = env_list->next;
+		free(temp->content);
+		free(temp);
+	}
+	while (export_list != NULL)
+	{
+		temp = export_list;
+		export_list = export_list->next;
+		free(temp->content);
+		free(temp);
+	}
 }

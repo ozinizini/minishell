@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:03:10 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/16 11:05:58 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/17 10:42:20 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,26 +102,5 @@ void	clean_up_processes_list(t_list *list)
 		free(process);
 		free(list);
 		list = list ->next;
-	}
-}
-
-void	clean_up_env_export_list(t_list *env_list, t_list *export_list)
-{
-	t_list	*temp;
-
-	temp = NULL;
-	while (env_list != NULL)
-	{
-		temp = env_list->next;
-		free(env_list->content);
-		free(env_list);
-		env_list = temp;
-	}
-	while (export_list != NULL)
-	{
-		temp = export_list->next;
-		free(export_list->content);
-		free(export_list);
-		export_list = temp;
 	}
 }
