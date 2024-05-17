@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 14:20:09 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/17 11:04:04 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/17 15:46:16 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <stdlib.h>
 # include <errno.h>
 # include <string.h>

@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:49:58 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/16 12:01:28 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/17 17:17:15 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,24 @@ void	close_file_descriptors(t_list *list)
 
 static void	execute_command(t_list *list, char **env, char *command_path)
 {
-	if (access(command_path, F_OK) != -1)
+	struct stat	path_stat;
+
+	if (stat(command_path, &path_stat) != -1)
 	{
+		if (S_ISDIR(path_stat.st_mode))
+		{
+			bash_error_message("is a directory", command_path);
+			exit(126);
+		}
 		if (access(command_path, R_OK) != -1)
 			execve(command_path, ((t_process *)list->content)->command, env);
 	}
 	else
 	{
-		close_file_descriptors(list);
-		bash_error_message("command not found", command_path);
+		if (strnstr(command_path, "/", ft_strlen(command_path)))
+			bash_error_message(strerror(errno), command_path);
+		else
+			bash_error_message("command not found", command_path);
 		exit(127);
 	}
 }

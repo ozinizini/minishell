@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:27:28 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/16 13:25:59 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/17 17:29:03 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ void	infile_child_process_bonus(t_list *process, t_prompt *prompt,
 	}
 	else if (fd_pipe)
 		close(fd_pipe[0][1]);
-	close_file_descriptors(process);
+	if (errno == EACCES)
+		exit(126);
 	exit(EXIT_FAILURE);
 }
 
@@ -116,7 +117,8 @@ void	intermediate_children_process(t_list *process, t_prompt *prompt,
 		close(fd_pipe[0]);
 		close(fd_pipe2[1]);
 	}
-	close_file_descriptors(process);
+	if (errno == EACCES)
+		exit(126);
 	exit(EXIT_FAILURE);
 }
 
@@ -140,6 +142,7 @@ void	outfile_child_process_bonus(t_list *process,
 	}
 	else
 		close(fd_pipe[0]);
-	close_file_descriptors(process);
+	if (errno == EACCES)
+		exit(126);
 	exit(EXIT_FAILURE);
 }
