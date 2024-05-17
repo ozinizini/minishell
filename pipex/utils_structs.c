@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:03:10 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/17 11:36:49 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/17 11:41:14 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ void	free_prompt(t_prompt *prompt)
 	free(prompt);
 }
 
+static	void	free_process_contents(t_process *process)
+{
+	free_2d_char_array(process->command);
+	free(process->heredoc);
+}
+
 static	void	free_redirections_list(t_list *redirec_list)
 {
 	t_redir	*redirec;
@@ -80,8 +86,7 @@ void	clean_up_processes_list(t_list *list)
 		temp = list;
 		list = list->next;
 		process = (t_process *)temp->content;
-		free_2d_char_array(process->command);
-		free(process->heredoc);
+		free_process_contents(process);
 		redirec_list = process->redirections;
 		free_redirections_list(redirec_list);
 		free(process);
