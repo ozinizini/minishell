@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:03:10 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/17 11:03:28 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/17 11:36:49 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,31 +48,43 @@ void	free_prompt(t_prompt *prompt)
 	free(prompt);
 }
 
+static	void	free_redirections_list(t_list *redirec_list)
+{
+	t_redir	*redirec;
+	t_list	*temp;
+
+	redirec = NULL;
+	temp = NULL;
+	while (redirec_list != NULL)
+	{
+		temp = redirec_list;
+		redirec_list = redirec_list->next;
+		redirec = (t_redir *)temp->content;
+		free(redirec->name);
+		free(redirec);
+		free(temp);
+	}
+}
+
 void	clean_up_processes_list(t_list *list)
 {
 	t_process	*process;
 	t_list		*redirec_list;
-	t_redir		*redirec;
+	t_list		*temp;
 
 	process = NULL;
 	redirec_list = NULL;
-	redirec = NULL;
+	temp = NULL;
 	while (list != NULL)
 	{
-		process = (t_process *)list->content;
+		temp = list;
+		list = list->next;
+		process = (t_process *)temp->content;
 		free_2d_char_array(process->command);
 		free(process->heredoc);
 		redirec_list = process->redirections;
-		while (redirec_list != NULL)
-		{
-			redirec = (t_redir *)redirec_list->content;
-			free(redirec->name);
-			free(redirec);
-			free(redirec_list);
-			redirec_list = redirec_list->next;
-		}
+		free_redirections_list(redirec_list);
 		free(process);
-		free(list);
-		list = list ->next;
+		free(temp);
 	}
 }
