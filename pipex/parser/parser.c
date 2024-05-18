@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:56:03 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/14 18:18:54 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/18 19:28:44 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	add_var(t_list **env, int var)
 	t_list	*exit_node;
 	char	*join;
 
+	exit_node = NULL;
+	join = NULL;
 	exit_status = NULL;
 	exit_status = ft_itoa(var);
 	join = ft_strjoin("?=", exit_status);
@@ -43,6 +45,7 @@ void	get_process_list(char **str_process, t_list **list)
 	t_list	*new_node;
 
 	i = 0;
+	new_node = NULL;
 	while (str_process[i])
 	{
 		new_node = ft_lstnew(str_process[i]);

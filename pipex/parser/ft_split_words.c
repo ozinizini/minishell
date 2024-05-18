@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_words.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arosas-j <arosas-j@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:10:23 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/14 19:34:32 by arosas-j         ###   ########.fr       */
+/*   Updated: 2024/05/18 19:30:14 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static char	*get_str(char *s, size_t pos)
 	size_t	start;
 	char	*str;
 
+	str = NULL;
 	i = get_start(s, pos);
 	start = i;
 	while (s[i] != ' ' && s[i] != '\0')
@@ -84,7 +85,7 @@ static void	free_split(char **split, size_t i)
 {
 	while (i-- > 0)
 	{
-		if (split[i])
+		if (split && split[i])
 			free(split[i]);
 	}
 	free(split);
@@ -97,6 +98,7 @@ char	**ft_split_words(char *s)
 	size_t	i;
 	size_t	len;
 
+	split = NULL;
 	i = 0;
 	if (s == NULL)
 		return (NULL);
@@ -110,10 +112,7 @@ char	**ft_split_words(char *s)
 	{
 		split[i] = get_str(s, i);
 		if (split[i] == NULL)
-		{
-			free_split(split, i);
-			return (NULL);
-		}
+			return (free_split(split, i), NULL);
 		i++;
 	}
 	split[len] = NULL;

@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 16:39:24 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/14 19:41:01 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/18 19:27:59 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_process	*parse_process(void *str_process, t_list *env)
 	t_process	*process;
 	size_t		i;
 
+	process = NULL;
 	i = 0;
 	process = malloc(sizeof(t_process));
 	if (!process)

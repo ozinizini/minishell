@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:31:33 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/18 17:47:56 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/18 20:33:37 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*get_input(void)
 {
 	char	*input;
 
-	//input = NULL;
+	input = NULL;
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, int_handler);
 	set_echoctl(0, 0);
@@ -55,10 +55,10 @@ void	initialize_minishell(int exit_status,
 	char	*input;
 	t_list	*processes;
 
-	processes = NULL;
-	input = NULL;
 	while (1)
 	{
+		processes = NULL;
+		input = NULL;
 		input = get_input();
 		exit_status = update_exit_status(exit_status);
 		if (!input)

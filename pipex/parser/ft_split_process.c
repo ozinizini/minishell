@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_process.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arosas-j <arosas-j@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:07:02 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/09 14:07:04 by arosas-j         ###   ########.fr       */
+/*   Updated: 2024/05/18 19:30:47 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static char	*get_str(char *s, size_t pos)
 	size_t	start;
 	char	*str;
 
+	str = NULL;
 	i = get_start(s, pos);
 	start = i;
 	while (s[i] != '|' && s[i] != '\0')
@@ -78,7 +79,7 @@ static void	free_split(char **split, size_t i)
 {
 	while (i-- > 0)
 	{
-		if (split[i])
+		if (split && split[i])
 			free(split[i]);
 	}
 	free(split);
@@ -91,6 +92,7 @@ char	**ft_split_process(char *s)
 	size_t	i;
 	size_t	len;
 
+	split = NULL;
 	if (s == NULL)
 		return (NULL);
 	len = get_len(s);
