@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_heredoc_file.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arosas-j <arosas-j@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 10:43:19 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/17 22:58:36 by arosas-j         ###   ########.fr       */
+/*   Updated: 2024/05/18 14:39:57 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,6 @@ char	*create_heredoc_filename(int here_doc_process_counter)
 	return (here_doc_name);
 }
 
-static int	heredoc_read_error(int fd, char *here_doc_filename)
-{
-	close(fd);
-	unlink(here_doc_filename);
-	ft_putstr_fd("Error: read failed in heredoc", STDERR_FILENO);
-	return (0);
-}
-
 static	int	delimiter_vs_input(char *delimiter, char *buffer)
 {
 	int	comparison_len;
@@ -54,37 +46,46 @@ static	int	delimiter_vs_input(char *delimiter, char *buffer)
 		return (0);
 }
 
+static	int	write_to_heredoc(char *delimiter,
+	char *here_doc_filename, char *buffer, int fd)
+{
+	ssize_t	bytes_read;
+
+	bytes_read = 1;
+	while (bytes_read > 0)
+	{
+		ft_putstr_fd("> ", STDOUT_FILENO);
+		ft_memset(buffer, 0, sizeof(buffer));
+		set_echoctl(0, 0);
+		bytes_read = read(STDIN_FILENO, buffer, BUFFER_SIZE);
+		set_echoctl(0, 1);
+		if (bytes_read == -1)
+		{
+			if (errno == EINTR)
+				return (-1);
+			return (unlink(here_doc_filename));
+		}
+		if (delimiter_vs_input(delimiter, buffer))
+			break ;
+		ft_putstr_fd(buffer, fd);
+	}
+	return (1);
+}
+
 int	create_heredoc_file(char *delimiter, char *here_doc_filename)
 {
-    struct sigaction sa;
-    int		fd;
-    char	buffer[BUFFER_SIZE];
-    ssize_t	bytes_read;
+	struct sigaction	sa;
+	int					fd;
+	char				buffer[BUFFER_SIZE];
+	int					write_status;
 
-    sa.sa_handler = int_heredoc;
-    sa.sa_flags = 0;
-    sigaction(SIGINT, &sa, NULL);
-    bytes_read = 1;
-    fd = open(here_doc_filename, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-    if (fd == -1)
-        return (0);
-    while (bytes_read > 0)
-    {
-        ft_putstr_fd("> ", STDOUT_FILENO);
-        ft_memset(buffer, 0, sizeof(buffer));
-        set_echoctl(0, 0);
-        bytes_read = read(STDIN_FILENO, buffer, BUFFER_SIZE);
-        set_echoctl(0, 1);
-        if (bytes_read == -1)
-        {
-			if (errno == EINTR)
-                continue;
-            return (heredoc_read_error(fd, here_doc_filename));
-        }
-        if (delimiter_vs_input(delimiter, buffer))
-            break ;
-        ft_putstr_fd(buffer, fd);
-    }
-    close(fd);
-    return (1);
+	sa.sa_handler = int_heredoc;
+	sa.sa_flags = 0;
+	sigaction(SIGINT, &sa, NULL);
+	fd = open(here_doc_filename, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (fd == -1)
+		return (0);
+	write_status = write_to_heredoc(delimiter, here_doc_filename, buffer, fd);
+	close(fd);
+	return (write_status);
 }

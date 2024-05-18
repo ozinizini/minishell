@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arosas-j <arosas-j@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:31:33 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/17 16:23:24 by arosas-j         ###   ########.fr       */
+/*   Updated: 2024/05/18 17:47:56 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ int	g_sig;
 int	update_exit_status(int exit_status)
 {
 	if (g_sig)
-	{
 		exit_status = g_sig;
-		g_sig = 0;
-	}
+	g_sig = 0;
 	return (exit_status);
 }
 
@@ -35,7 +33,7 @@ char	*get_input(void)
 {
 	char	*input;
 
-	input = NULL;
+	//input = NULL;
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, int_handler);
 	set_echoctl(0, 0);
@@ -51,7 +49,7 @@ void	prepare_exe_sig(char *input)
 	signal(SIGINT, int_exe_sig);
 }
 
-int	initialize_minishell(int exit_status,
+void	initialize_minishell(int exit_status,
 	t_list *env_list, t_list *export_list)
 {
 	char	*input;
@@ -59,24 +57,26 @@ int	initialize_minishell(int exit_status,
 
 	processes = NULL;
 	input = NULL;
-	input = get_input();
-	exit_status = update_exit_status(exit_status);
-	if (!input)
-		exit(exit_status);
-	if (ft_strlen(input))
+	while (1)
 	{
-		prepare_exe_sig(input);
-		if (ft_check_syntax(input))
-			exit_status = 258;
-		else
+		input = get_input();
+		exit_status = update_exit_status(exit_status);
+		if (!input)
+			exit(exit_status);
+		if (ft_strlen(input))
 		{
-			processes = parser(input, env_list, exit_status);
-			exit_status = run_prompt(processes, &env_list, &export_list);
+			prepare_exe_sig(input);
+			if (ft_check_syntax(input))
+				exit_status = 258;
+			else
+			{
+				processes = parser(input, env_list, exit_status);
+				exit_status = run_prompt(processes, &env_list, &export_list);
+			}
+			clean_up_processes_list(processes);
 		}
-		clean_up_processes_list(processes);
+		free(input);
 	}
-	free(input);
-	return (exit_status);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -86,12 +86,15 @@ int	main(int argc, char **argv, char **env)
 	int		exit_status;
 
 	(void)argv;
-	(void)argc;
+	if (argc > 1)
+	{
+		ft_putstr_fd("Minishell doesn not take arguments\n", 2);
+		return (0);
+	}
 	exit_status = 0;
 	env_list = create_env_list(env);
 	export_list = create_env_list(env);
-	while (1)
-		exit_status = initialize_minishell(exit_status, env_list, export_list);
+	initialize_minishell(exit_status, env_list, export_list);
 	clean_up_env_export_list(env_list, export_list);
 	return (exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 14:20:09 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/17 15:46:16 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/18 15:10:34 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define BUFFER_SIZE 1024
 
 # include <stdio.h>
+# include <dirent.h>
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
@@ -54,6 +55,7 @@ int			handle_file_descriptors(t_list *list);
 char		*create_heredoc_filename(int here_doc_process_counter);
 int			create_heredoc_file(char *delimiter, char *here_doc_filename);
 void		init_heredocs(t_list *list);
+int			clean_up_heredoc_sigint(void);
 
 //Functions for the creation and initialization of 2D arrays
 

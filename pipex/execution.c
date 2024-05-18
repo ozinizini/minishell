@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:12:03 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/17 15:38:01 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/18 17:20:05 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ static int	return_exit_status(t_prompt *prompt, pid_t *pidc_array)
 		i++;
 	}
 	free(pidc_array);
+	clean_up_heredoc_sigint();
 	if (WIFEXITED(status))
 		exit_status = WEXITSTATUS(status);
+	if (WIFSIGNALED(status))
+		g_sig = WTERMSIG(status) + 128;
 	return (exit_status);
 }
 
@@ -96,31 +99,31 @@ static int	handle_processes_bonus(t_list *processes, t_prompt *prompt)
 	return (return_exit_status(prompt, pidc_array));
 }
 
-int	run_prompt(t_list *processes, t_list **env, t_list **export_list)
+int	run_prompt(t_list *p, t_list **env, t_list **export_list)
 {
-	t_prompt	*prompt;
+	t_prompt	*pr;
 	int			exit_status;
 
-	prompt = NULL;
+	pr = NULL;
 	exit_status = 0;
-	prompt = init_prompt(processes, &(*env), &(*export_list));
-	if (prompt->number_of_processes == 0)
+	pr = init_prompt(p, &(*env), &(*export_list));
+	if (pr->number_of_processes == 0)
 		return (exit_status);
-	init_heredocs(processes);
-	if (prompt->number_of_processes == 1
-		&& !((t_process *)processes->content)->command)
+	init_heredocs(p);
+	if (g_sig)
+		return (free_prompt(pr), exit_status);
+	if (pr->number_of_processes == 1 && !((t_process *)p->content)->command)
 	{
-		if ((((t_process *)processes->content)->heredoc))
-			unlink((((t_process *)processes->content)->heredoc));
-		exit_status = handle_file_descriptors(processes);
-		close_file_descriptors(processes);
+		unlink((((t_process *)p->content)->heredoc));
+		exit_status = handle_file_descriptors(p);
+		close_file_descriptors(p);
 		if (exit_status == -1)
 			exit_status = 1;
 	}
-	else if (prompt->number_of_processes == 1
-		&& is_built_in(((t_process *)processes->content)->command[0]))
-		exit_status = lonesome_built_in(processes, &prompt);
+	else if (pr->number_of_processes == 1
+		&& is_built_in(((t_process *)p->content)->command[0]))
+		exit_status = lonesome_built_in(p, &pr);
 	else
-		exit_status = handle_processes_bonus(processes, prompt);
-	return (free_prompt(prompt), exit_status);
+		exit_status = handle_processes_bonus(p, pr);
+	return (free_prompt(pr), exit_status);
 }

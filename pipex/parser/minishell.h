@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arosas-j <arosas-j@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:57:23 by arosas-j          #+#    #+#             */
-/*   Updated: 2024/05/17 18:31:22 by arosas-j         ###   ########.fr       */
+/*   Updated: 2024/05/18 15:12:52 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,6 @@ void			int_exe_sig(int sig);
 void			int_heredoc(int sig);
 void			set_echoctl(int fd, int enable);
 
-extern	int	g_sig;
+extern int	g_sig;
 
 #endif

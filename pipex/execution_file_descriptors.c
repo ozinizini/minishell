@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:51:26 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/17 14:53:47 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/18 17:14:56 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,12 @@ static	int	fd_error(t_list *list, t_list *redirections)
 	if (((t_process *)list->content)->fd_infile == -1
 		|| ((t_process *)list->content)->fd_outfile == -1)
 	{
-		if (((t_process *)list->content)->fd_outfile != -1)
+		if (((t_process *)list->content)->fd_outfile != -1
+			&& ((t_process *)list->content)->fd_outfile > 2)
 			close(((t_process *)list->content)->fd_outfile);
+		if (((t_process *)list->content)->fd_infile != -1
+			&& ((t_process *)list->content)->fd_infile > 2)
+			close(((t_process *)list->content)->fd_infile);
 		if ((((t_process *)list->content)->heredoc))
 			unlink((((t_process *)list->content)->heredoc));
 		bash_error_message(strerror(errno),

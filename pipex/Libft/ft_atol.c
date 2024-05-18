@@ -6,7 +6,7 @@
 /*   By: ozini <ozini@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:28:03 by ozini             #+#    #+#             */
-/*   Updated: 2024/05/13 17:40:01 by ozini            ###   ########.fr       */
+/*   Updated: 2024/05/18 14:04:05 by ozini            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 static long	check_quotient(long quotient)
 {
-	if (LONG_MAX >= quotient * 10)
+	if (LONG_MAX / 10 >= quotient)
 		return (quotient * 10);
 	else
 	{
